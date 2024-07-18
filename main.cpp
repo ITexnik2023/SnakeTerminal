@@ -42,10 +42,24 @@ int main(){
 		}    
 
 		playingfield[fruit_y][fruit_x] = '*';
-
+		if(asterisk >= 0 && asterisk <= 3){
+			speed = 10;
+		}
+		else if(asterisk > 3 && asterisk <= 6){
+			speed = 7;
+		}
+		else if(asterisk > 6 && asterisk <= 15){
+			speed = 5;
+		}
+		else if(asterisk > 15 ){
+			speed = 3;
+		}
+			
 		clear();
 		
-		//printw("You score:" , score, "%s\n");
+		printw("You score:%d",score);
+		printw("%s\n",";");
+
 		for(i = 0; i < 14; i++){
 			printw("%s\n", playingfield[i]);
 
@@ -71,13 +85,16 @@ int main(){
 		}
 				
 		
-
+		if(playingfield[y][x] == 'O'){//playingfield[snakestail_old[i].old_y][snakestail_old[i].old_x]){
+			isRunning = false;
+		}
 		if(playingfield[y][x] == '#'){
 			x = ox;
 			y = oy;
+			isRunning = false;
 		}
 
-		if (playingfield[y][x] != '#') { // Движение только если голова змеи не упирается
+		if (playingfield[y][x] != '#' || playingfield[y][x] != 'O') { // Движение только если голова змеи не упирается
 
 			for (i = asterisk; i >= 0; i--) { // в решётку или хвост
 
